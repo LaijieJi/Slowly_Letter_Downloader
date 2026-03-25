@@ -1,57 +1,56 @@
 # Slowly Letter Downloader
 
-Automates the process of downloading letters from slowly in PDF form.
-
-## Installation
-
-A Windows binary is available, an installable version is currently in development.
+Automates the downloading of letters from the Slowly pen-pal app and saves them as PDFs.
 
 ## Requirements
 
- - Python 3.9
- - Selenium==4.20
- - cefpython3==66.1
- - py7zr==0.20.0
- - pdfrw==0.4
- - customtkinter==4.5.10
- - pyglet==1.5.26
- 
- Chrome is required, however if an installation is not found, the program will download a portable version and keep it in root.
+- Python 3.13 or later
+- Chromium (installed automatically via Playwright)
 
-## Features
+On macOS, Python 3.13 requires the Tk bindings to be installed separately:
 
- **Current features**
- - Graphical user interface for ease of use
- - Download letters from as many penpals as you want as PDFs
- - Download images attached to letters, including stamps used
- - Can be run again in the future to download new letters received/sent (currently for this feature to work, you cannot move the letters from where the program places them)
- - Almost completely automatic
- - Both light and dark themes selectable by the user, follows system by default
+```bash
+brew install python-tk@3.13
+```
 
-**Planned features** 
+## Installation
 
- - Allow for customisation of PDFs downloaded e.g. portrait, landscape
- - Replace cefpython with a lighter alternative
- - Cancel button 
- - Properly compensate for different DPI settings
+```bash
+pip install -r requirements.txt
+playwright install chromium
+```
 
 ## Usage
 
-This program can only be used via the GUI, you can launch it using:
-```python
+Launch the application:
+
+```bash
 python main.py
 ```
-If you're using the Windows executable, just open SLD.exe.
 
- - Once opened scan the QR code from the integrated browser using the Slowly app on your phone, and click "Load Penpals".
- - If you do not have Chrome installed and this is your first time launching the program you will have to wait whilst it downloads Chrome, this may take a while depending on your internet connection.
- - When your penpals have loaded, select the ones you wish to download the letters from and click the "Run" button.
- - Downloaded letters can be found within the root directory, alongside the main.exe file, in a folder called "Letters".
+1. Click **Login**. A browser window will open to the Slowly web app.
+2. Scan the QR code using the Slowly app on your phone. The browser will close automatically once login is detected.
+3. Select the penpals you wish to download letters from.
+4. Click **Run**. Letters are saved as PDFs in the `letters/` directory, organised by penpal name.
+
+Running the program again will skip letters that have already been downloaded.
+
+## Features
+
+- Cross-platform - runs on Windows, macOS, and Linux
+- Downloads letters from one or more penpals in a single run
+- Preserves images and stamps embedded in letters
+- Skips already-downloaded letters on subsequent runs
+- Light and dark themes, follows system appearance by default
+
+## Output
+
+Downloaded PDFs are saved to `letters/<penpal_name>/` with names in the format `letter{N}_{sender}_{date}.pdf`. Each PDF contains metadata (letter number and penpal name) for deduplication.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
-
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

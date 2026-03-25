@@ -1,0 +1,6 @@
+# Requires Python >= 3.13 on macOS Sequoia (Tk compatibility)
+playwright>=1.40
+customtkinter>=5.0
+pdfrw>=0.4
+pyglet>=1.5.26
+Pillow>=9.0
